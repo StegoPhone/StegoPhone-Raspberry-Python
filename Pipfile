@@ -1,0 +1,29 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+"RPi.GPIO" = "*"
+Adafruit-Blinka = "*"
+adafruit-circuitpython-busdevice = "*"
+adafruit-circuitpython-qwiictwist = "*"
+sparkfun-circuitpython-qwiickeypad = "*"
+sparkfun-circuitpython-serlcd = "*"
+
+[dev-packages]
+"RPi.GPIO" = "*"
+Adafruit-Blinka = "*"
+adafruit-circuitpython-busdevice = "*"
+adafruit-circuitpython-qwiictwist = "*"
+sparkfun-circuitpython-qwiickeypad = "*"
+sparkfun-circuitpython-serlcd = "*"
+
+[requires]
+python_version = "3.7"
+"RPi.GPIO" = "*"
+Adafruit-Blinka = "*"
+adafruit-circuitpython-busdevice = "*"
+adafruit-circuitpython-qwiictwist = "*"
+sparkfun-circuitpython-qwiickeypad = "*"
+sparkfun-circuitpython-serlcd = "*"

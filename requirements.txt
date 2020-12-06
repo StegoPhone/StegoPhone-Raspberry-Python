@@ -1,0 +1,7 @@
+RPi.GPIO
+adafruit-blinka
+adafruit-circuitpython-busdevice
+adafruit-circuitpython-qwiictwist
+sparkfun-circuitpython-qwiickeypad
+sparkfun-circuitpython-serlcd
+pyserial~=3.5

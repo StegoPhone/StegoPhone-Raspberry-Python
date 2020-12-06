@@ -1,0 +1,176 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "c54b53fb55cff0a9fc0c18e52b6bf6d6650e0448689916ddf8bd3c006c23699d"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "Adafruit-Blinka": "*",
+            "RPi.GPIO": "*",
+            "adafruit-circuitpython-busdevice": "*",
+            "adafruit-circuitpython-qwiictwist": "*",
+            "python_version": "3.7",
+            "sparkfun-circuitpython-qwiickeypad": "*",
+            "sparkfun-circuitpython-serlcd": "*"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.python.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "adafruit-blinka": {
+            "hashes": [
+                "sha256:5b94f03184667574e94c2a40d7bbc1c685a14399e08a7b8614843ba1b6f6546a"
+            ],
+            "index": "pypi",
+            "version": "==5.8.1"
+        },
+        "adafruit-circuitpython-busdevice": {
+            "hashes": [
+                "sha256:8d686bcfe1311ed39470e06121cea41c9c5675d958d52c861f612761d9674d88"
+            ],
+            "index": "pypi",
+            "version": "==5.0.1"
+        },
+        "adafruit-circuitpython-qwiictwist": {
+            "hashes": [
+                "sha256:55ef003df257f55beee5c91d400b8616c0210f09269893f3ed52bb0e24fe5965"
+            ],
+            "index": "pypi",
+            "version": "==1.0.6"
+        },
+        "adafruit-platformdetect": {
+            "hashes": [
+                "sha256:3ad9ce659e789876ee2858476c1192d45dde8492a9217ff65680f5e57249b84a"
+            ],
+            "version": "==2.22.2"
+        },
+        "adafruit-pureio": {
+            "hashes": [
+                "sha256:2d6522d9b333e60d67fad8c3169b0c6560016a5f5f8f571b1f9692db60e14eb4"
+            ],
+            "version": "==1.1.7"
+        },
+        "pyftdi": {
+            "hashes": [
+                "sha256:5f591cefc87c89177798b53c70914fadff54717433afc9ccb50213d053e87ee6",
+                "sha256:f26d61fe14a3d089ea7700e774501c52ce3312f3522763a407cd33988124bd5e"
+            ],
+            "version": "==0.52.0"
+        },
+        "pyserial": {
+            "hashes": [
+                "sha256:3c77e014170dfffbd816e6ffc205e9842efb10be9f58ec16d3e8675b4925cddb",
+                "sha256:c4451db6ba391ca6ca299fb3ec7bae67a5c55dde170964c7a14ceefec02f2cf0"
+            ],
+            "version": "==3.5"
+        },
+        "pyusb": {
+            "hashes": [
+                "sha256:d69ed64bff0e2102da11b3f49567256867853b861178689671a163d30865c298"
+            ],
+            "version": "==1.1.0"
+        },
+        "rpi.gpio": {
+            "hashes": [
+                "sha256:7424bc6c205466764f30f666c18187a0824077daf20b295c42f08aea2cb87d3f"
+            ],
+            "index": "pypi",
+            "version": "==0.7.0"
+        },
+        "sparkfun-circuitpython-qwiickeypad": {
+            "hashes": [
+                "sha256:faaa269d49710f9918292a50867797629bfeca556c75b4f22a10691cf2afdcaa"
+            ],
+            "index": "pypi",
+            "version": "==1.0.2"
+        },
+        "sparkfun-circuitpython-serlcd": {
+            "hashes": [
+                "sha256:037cbc9f4de093792b399443eb9f8fd141c4ddd309f86235299acfb680783665"
+            ],
+            "index": "pypi",
+            "version": "==1.0.1"
+        }
+    },
+    "develop": {
+        "adafruit-blinka": {
+            "hashes": [
+                "sha256:5b94f03184667574e94c2a40d7bbc1c685a14399e08a7b8614843ba1b6f6546a"
+            ],
+            "index": "pypi",
+            "version": "==5.8.1"
+        },
+        "adafruit-circuitpython-busdevice": {
+            "hashes": [
+                "sha256:8d686bcfe1311ed39470e06121cea41c9c5675d958d52c861f612761d9674d88"
+            ],
+            "index": "pypi",
+            "version": "==5.0.1"
+        },
+        "adafruit-circuitpython-qwiictwist": {
+            "hashes": [
+                "sha256:55ef003df257f55beee5c91d400b8616c0210f09269893f3ed52bb0e24fe5965"
+            ],
+            "index": "pypi",
+            "version": "==1.0.6"
+        },
+        "adafruit-platformdetect": {
+            "hashes": [
+                "sha256:3ad9ce659e789876ee2858476c1192d45dde8492a9217ff65680f5e57249b84a"
+            ],
+            "version": "==2.22.2"
+        },
+        "adafruit-pureio": {
+            "hashes": [
+                "sha256:2d6522d9b333e60d67fad8c3169b0c6560016a5f5f8f571b1f9692db60e14eb4"
+            ],
+            "version": "==1.1.7"
+        },
+        "pyftdi": {
+            "hashes": [
+                "sha256:5f591cefc87c89177798b53c70914fadff54717433afc9ccb50213d053e87ee6",
+                "sha256:f26d61fe14a3d089ea7700e774501c52ce3312f3522763a407cd33988124bd5e"
+            ],
+            "version": "==0.52.0"
+        },
+        "pyserial": {
+            "hashes": [
+                "sha256:3c77e014170dfffbd816e6ffc205e9842efb10be9f58ec16d3e8675b4925cddb",
+                "sha256:c4451db6ba391ca6ca299fb3ec7bae67a5c55dde170964c7a14ceefec02f2cf0"
+            ],
+            "version": "==3.5"
+        },
+        "pyusb": {
+            "hashes": [
+                "sha256:d69ed64bff0e2102da11b3f49567256867853b861178689671a163d30865c298"
+            ],
+            "version": "==1.1.0"
+        },
+        "rpi.gpio": {
+            "hashes": [
+                "sha256:7424bc6c205466764f30f666c18187a0824077daf20b295c42f08aea2cb87d3f"
+            ],
+            "index": "pypi",
+            "version": "==0.7.0"
+        },
+        "sparkfun-circuitpython-qwiickeypad": {
+            "hashes": [
+                "sha256:faaa269d49710f9918292a50867797629bfeca556c75b4f22a10691cf2afdcaa"
+            ],
+            "index": "pypi",
+            "version": "==1.0.2"
+        },
+        "sparkfun-circuitpython-serlcd": {
+            "hashes": [
+                "sha256:037cbc9f4de093792b399443eb9f8fd141c4ddd309f86235299acfb680783665"
+            ],
+            "index": "pypi",
+            "version": "==1.0.1"
+        }
+    }
+}
