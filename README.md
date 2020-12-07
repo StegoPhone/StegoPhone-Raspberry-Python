@@ -4,7 +4,7 @@
  - dtoverlay=uart3
  - dtoverlay=uart5,ctsrts
 - RN-52 Bluetooth on ttyAMA2 (https://www.sparkfun.com/products/12849)
-- Serial LCD on ttyAMA1 (https://www.sparkfun.com/products/9052)
+- Serial LCD on ttyAMA1 (https://www.sparkfun.com/products/retired/9067)
 
 * GPIO02 - SDA to i2c chain
 * GPIO03 - SCL to i2c chain
