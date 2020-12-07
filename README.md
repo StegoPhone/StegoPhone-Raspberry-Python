@@ -1,4 +1,4 @@
-# StegoPhone-python
+# StegoPhone Raspberry (Pi) Python
 
 - Raspberry Pi 4
 - dtoverlay=uart3
