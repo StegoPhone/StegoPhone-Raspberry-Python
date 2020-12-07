@@ -12,8 +12,8 @@ import config
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # twist
-GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # keypad
+GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # twist, active low
+GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)  # keypad, active low
 
 # Enable UART Serial communication
 rn52 = serial.Serial(
@@ -47,6 +47,7 @@ twist = Sparkfun_QwiicTwist(i2c)  # default address is 0x3F
 keypad = Sparkfun_QwiicKeypad(i2c)  # default address is 0x4b
 firstKeypadFifoRead = True
 
+
 def clearLCD():
 	data = bytearray()
 	data.append(0xFE)
@@ -56,15 +57,16 @@ def clearLCD():
 
 def twistInterrupt():
 	try:
-		GPIO.wait_for_edge(17, GPIO.BOTH)
+		GPIO.wait_for_edge(17, GPIO.FALLING)
 		twist.clear_interrupts()
 		serLCD.write('!')
 	except:
 		serLCD.write('X')
 
+
 def keypadInterrupt():
 	try:
-		GPIO.wait_for_edge(18, GPIO.BOTH)
+		GPIO.wait_for_edge(18, GPIO.FALLING)
 		if firstKeypadFifoRead:
 			keypad.update_fifo()
 			firstKeypadFifoRead = False
@@ -73,6 +75,7 @@ def keypadInterrupt():
 	except Exception as e:
 		print(e)
 		serLCD.write('X')
+
 
 clearLCD()
 serLCD.set_cursor(0, 0)
