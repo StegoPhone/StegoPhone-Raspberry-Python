@@ -47,8 +47,6 @@ rn52CMDL.value = False  # command mode
 
 twist = Sparkfun_QwiicTwist(i2c)  # default address is 0x3F
 keypad = Sparkfun_QwiicKeypad(i2c)  # default address is 0x4b
-firstKeypadFifoRead = True
-
 
 def clearLCD():
 	data = bytearray()
@@ -65,19 +63,25 @@ def initTwist():
 		global serLCD
 		try:
 			GPIO.wait_for_edge(17, GPIO.FALLING)
+			if twist.moved:
+				serLCD.write('Count: ' + str(twist.count))
+			if twist.pressed:
+				serLCD.write('Pressed!')
+			if twist.clicked:
+				serLCD.write('Clicked!')
 			twist.clear_interrupts()
-			serLCD.write('!')
 		except:
 			serLCD.write('X')
 
 	serLCD.set_cursor(0, 1)
 	serLCD.write("Init twist")
-	twist.clear_interrupts()
-	#if (not twist.connected()):
-	#	serLCD.set_cursor(0, 1)
-	#	serLCD.write("Twist not found")
-	#	exit(1)
 
+	if not twist.connected:
+		serLCD.set_cursor(0, 1)
+		serLCD.write("Twist not found")
+		exit(1)
+
+	twist.clear_interrupts()
 	twist.set_color(0xFF, 0x67, 0x00)  # Safety Orange
 	twistThread = threading.Thread(target=twistInterrupt)
 	twistThread.start()
@@ -87,15 +91,13 @@ def initKeypad():
 	global keypad
 
 	def keypadInterrupt():
-		global firstKeypadFifoRead
 		global keypad
 		global serLCD
 		try:
 			GPIO.wait_for_edge(18, GPIO.FALLING)
-			if firstKeypadFifoRead:
-				keypad.update_fifo()
-				firstKeypadFifoRead = False
-			value = keypad.button()
+			print('Interrupt:')
+			keypad.update_fifo()
+			value = keypad.button
 			serLCD.write(str(value))
 		except Exception as e:
 			print(e)
@@ -103,6 +105,11 @@ def initKeypad():
 
 	serLCD.set_cursor(0, 1)
 	serLCD.write("Init keypad")
+	if keypad.connected:
+		print('Keypad connected. Firmware: ', keypad.version)
+	else:
+		print('Keypad does not appear to be connected. Please check wiring.')
+		exit(1)
 	keypadThread = threading.Thread(target=keypadInterrupt)
 	keypadThread.start()
 
