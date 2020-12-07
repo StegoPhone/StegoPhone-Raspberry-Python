@@ -30,6 +30,8 @@ def clearLCD():
 i2c = busio.I2C(board.SCL, board.SDA)
 spi = busio.SPI(board.SCLK, board.MOSI, board.MISO)
 rn52EN = digitalio.DigitalInOut(board.D24)
+rn52EN.direction = digitalio.Direction.OUTPUT
+rn52EN.value = False
 
 twist = Sparkfun_QwiicTwist(i2c)  # default address is 0x3F
 keypad = Sparkfun_QwiicKeypad(i2c) # default address is 0x4b
@@ -44,12 +46,16 @@ twist.set_color(0xFF,0x67,0x00) # Safety Orange
 
 serLCD.set_cursor(0,1)
 serLCD.write("Init SPI  ") # spaces to clear 'twist'
-twist.set_color(0xFF,0x80,0x00) # increment color
+twist.set_color(0xFF,0x80,0x20) # increment color
 
 while not spi.try_lock():
     pass
 spi.configure(baudrate=16000000)
 spi.unlock()
+
+serLCD.set_cursor(0,1)
+serLCD.write("Init RN52 ") # spaces to clear
+rn52EN.value = True
 
 # TODO: more init
 
