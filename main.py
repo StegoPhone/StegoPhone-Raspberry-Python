@@ -35,6 +35,8 @@ serLcdPort = serial.Serial(
 # setup IO
 serLCD = Sparkfun_SerLCD_UART(serLcdPort)
 i2c = busio.I2C(board.SCL, board.SDA)
+i2c.scan()  # test of low level?
+
 spi = busio.SPI(board.SCLK, board.MOSI, board.MISO)
 rn52ENH = digitalio.DigitalInOut(board.D24)
 rn52ENH.direction = digitalio.Direction.OUTPUT
@@ -54,8 +56,9 @@ def clearLCD():
 	data.append(0x01)
 	serLCD._write_bytes(data)
 
-
 def twistInterrupt():
+	global twist
+	global serLCD
 	try:
 		GPIO.wait_for_edge(17, GPIO.FALLING)
 		twist.clear_interrupts()
@@ -63,8 +66,10 @@ def twistInterrupt():
 	except:
 		serLCD.write('X')
 
-
 def keypadInterrupt():
+	global firstKeypadFifoRead
+	global keypad
+	global serLCD
 	try:
 		GPIO.wait_for_edge(18, GPIO.FALLING)
 		if firstKeypadFifoRead:
@@ -76,43 +81,56 @@ def keypadInterrupt():
 		print(e)
 		serLCD.write('X')
 
+def initTwist():
+	global serLCD
+	global twist
+	serLCD.set_cursor(0, 1)
+	serLCD.write("Init twist")
+	twist.clear_interrupts()
+	#if (not twist.connected()):
+	#	serLCD.set_cursor(0, 1)
+	#	serLCD.write("Twist not found")
+	#	exit(1)
+
+	twist.set_color(0xFF, 0x67, 0x00)  # Safety Orange
+	twistThread = threading.Thread(target=twistInterrupt)
+	twistThread.start()
+
+def initKeypad():
+	global serLCD
+	global keypad
+	serLCD.set_cursor(0, 1)
+	serLCD.write("Init keypad")
+	keypadThread = threading.Thread(target=keypadInterrupt)
+	keypadThread.start()
+
+def initSPI():
+	global serLCD
+	global spi
+	global twist
+	serLCD.set_cursor(0, 1)
+	serLCD.write("Init SPI  ")  # spaces to clear 'twist'
+	twist.set_color(0xFF, 0xA0, 0x40)  # increment color
+
+	while not spi.try_lock():
+		pass
+	spi.configure(baudrate=16000000)
+	spi.unlock()
+
+def initRN52():
+	global rn52ENH
+	serLCD.set_cursor(0, 1)
+	serLCD.write("Init RN52 ")  # spaces to clear
+	rn52ENH.value = True
 
 clearLCD()
 serLCD.set_cursor(0, 0)
 serLCD.write('StegoPhone')
 
-
-def initTwist():
-	serLCD.set_cursor(0, 1)
-	serLCD.write("Init twist")
-	if (not twist.connected()):
-		serLCD.set_cursor(0, 1)
-		serLCD.write("Twist not found")
-		exit(1)
-
-	twist.clear_interrupts()
-	twist.set_color(0xFF, 0x67, 0x00)  # Safety Orange
-	twistThread = threading.Thread(target=twistInterrupt)
-	twistThread.start()
-
-
-serLCD.set_cursor(0, 1)
-serLCD.write("Init keypad")
-keypadThread = threading.Thread(target=keypadInterrupt)
-keypadThread.start()
-
-serLCD.set_cursor(0, 1)
-serLCD.write("Init SPI  ")  # spaces to clear 'twist'
-twist.set_color(0xFF, 0xA0, 0x40)  # increment color
-
-while not spi.try_lock():
-	pass
-spi.configure(baudrate=16000000)
-spi.unlock()
-
-serLCD.set_cursor(0, 1)
-serLCD.write("Init RN52 ")  # spaces to clear
-rn52ENH.value = True
+initTwist()
+initKeypad()
+initSPI()
+initRN52()
 
 # TODO: more init
 
