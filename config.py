@@ -1,1 +1,2 @@
 LCD_SERIAL_PORT = '/dev/ttyAMA1'
+RN52_SERIAL_PORT = '/dev/ttyAMA2'
