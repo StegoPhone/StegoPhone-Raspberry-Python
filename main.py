@@ -56,34 +56,20 @@ def clearLCD():
 	data.append(0x01)
 	serLCD._write_bytes(data)
 
-def twistInterrupt():
-	global twist
-	global serLCD
-	try:
-		GPIO.wait_for_edge(17, GPIO.FALLING)
-		twist.clear_interrupts()
-		serLCD.write('!')
-	except:
-		serLCD.write('X')
-
-def keypadInterrupt():
-	global firstKeypadFifoRead
-	global keypad
-	global serLCD
-	try:
-		GPIO.wait_for_edge(18, GPIO.FALLING)
-		if firstKeypadFifoRead:
-			keypad.update_fifo()
-			firstKeypadFifoRead = False
-		value = keypad.button()
-		serLCD.write(str(value))
-	except Exception as e:
-		print(e)
-		serLCD.write('X')
-
 def initTwist():
 	global serLCD
 	global twist
+
+	def twistInterrupt():
+		global twist
+		global serLCD
+		try:
+			GPIO.wait_for_edge(17, GPIO.FALLING)
+			twist.clear_interrupts()
+			serLCD.write('!')
+		except:
+			serLCD.write('X')
+
 	serLCD.set_cursor(0, 1)
 	serLCD.write("Init twist")
 	twist.clear_interrupts()
@@ -99,6 +85,22 @@ def initTwist():
 def initKeypad():
 	global serLCD
 	global keypad
+
+	def keypadInterrupt():
+		global firstKeypadFifoRead
+		global keypad
+		global serLCD
+		try:
+			GPIO.wait_for_edge(18, GPIO.FALLING)
+			if firstKeypadFifoRead:
+				keypad.update_fifo()
+				firstKeypadFifoRead = False
+			value = keypad.button()
+			serLCD.write(str(value))
+		except Exception as e:
+			print(e)
+			serLCD.write('X')
+
 	serLCD.set_cursor(0, 1)
 	serLCD.write("Init keypad")
 	keypadThread = threading.Thread(target=keypadInterrupt)
