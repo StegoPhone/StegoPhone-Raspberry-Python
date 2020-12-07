@@ -8,6 +8,11 @@ from sparkfun_serlcd import Sparkfun_SerLCD_UART
 from QwiicTwist import Sparkfun_QwiicTwist
 from QwiicKeypad import Sparkfun_QwiicKeypad
 import config
+import RPi.GPIO as GPIO
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # twist
+GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  # keypad
 
 # Enable UART Serial communication
 rn52 = serial.Serial(
@@ -55,6 +60,7 @@ serLCD.write('StegoPhone')
 
 serLCD.set_cursor(0, 1)
 serLCD.write("Init twist")
+twist.clear_interrupts()
 twist.set_color(0xFF, 0x67, 0x00)  # Safety Orange
 
 serLCD.set_cursor(0, 1)
@@ -80,3 +86,16 @@ twist.set_color(0x00, 0xFF, 0xFF)  # Teal
 # while True:
 #    spi.write(bytes(range(64)))
 #    time.sleep(0.1)
+
+# move to thread
+serLCD.set_cursor(0, 1)
+serLCD.write('Twist to exit')
+try:
+    GPIO.wait_for_edge(17, GPIO.BOTH) #twist
+    twist.clear_interrupts()
+    serLCD.write('!')
+finally:
+    GPIO.cleanup()           # clean up GPIO on normal exit
+
+clearLCD()
+serLCD.write('Bye!')
