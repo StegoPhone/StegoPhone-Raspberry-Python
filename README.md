@@ -3,7 +3,8 @@
 - Raspberry Pi 4
  - dtoverlay=uart3
  - dtoverlay=uart5,ctsrts
-- RN-52 Bluetooth https://www.sparkfun.com/products/12849
+- RN-52 Bluetooth on ttyAMA2 https://www.sparkfun.com/products/12849
+- Serial LCD on ttyAMA1
 
 * GPIO02 - SDA to i2c chain
 * GPIO03 - SCL to i2c chain
