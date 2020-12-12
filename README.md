@@ -1,5 +1,7 @@
 # StegoPhone Raspberry (Pi) Python
 
+This repo was specifically working towards activating an RN52 on a Raspberry Pi along with some of the other I2C display equipment I had on hand. I intended to use GNURadio in the middle section. This repo is likely not going to progress.
+
 - Raspberry Pi 4
 - dtoverlay=uart3
 - dtoverlay=uart5,ctsrts
